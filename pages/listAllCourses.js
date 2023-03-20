@@ -75,7 +75,7 @@ export default function ListAllCourses({data, courseList}) {
                 <Col/>
                 <Col css={{ d: "flex" }}>
                   <Tooltip content="Insert grades">
-                    <Link href="./viewAll" passHref>
+                    <Link href={`./viewAll?id=` +course.id}>
                     <IconButton onClick={() => console.log("Edit course", course.id)} css={{ "marginLeft": "20px" }}>
                       <EditIcon size={20} fill="#979797"/>
                     </IconButton>

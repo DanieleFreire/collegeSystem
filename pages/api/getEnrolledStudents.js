@@ -3,9 +3,11 @@
 
 export default function getEnrolledStudents(req, res) {
 
-    console.log("login api page called...");
+    // get tge ID for the query
+    console.log("get enrolled page ID for query: " + req.query.studentid);
    
-      
+    let currentID = req.query.studentid;
+
     // get the client
     const mysql = require('mysql2');
   
@@ -21,31 +23,19 @@ export default function getEnrolledStudents(req, res) {
   
     // simple query
   connection.query(
-    "SELECT * FROM wse.courses;",
+    "select * from students where enrolledin = '"+currentID+"';",
     function(err, results, fields) {
    
-        // loop over all the records 
 
                 
-          console.log(results); // results contains rows returned by server
-    
-          console.log(results.length);
-        
-            
+        console.log("sending back the results");  
+        console.log(results); // results contains rows returned by server
+               
            
-        // return back the records
-        if(results.length >= 1){
+        console.log("API results is TRUE. Should send an res.");
+        res.status(200).json(results);
 
-          console.log("API results is TRUE. Should send an res.");
-          res.status(200).json(results);
-
-        } else {
-         
-          console.log("API results is FALSE.");
-          res.status(200).json("fail");
-    
-        }
-
+      
               
      
     }
