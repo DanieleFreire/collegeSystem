@@ -24,16 +24,20 @@ const Styledimg = styled("img", {
   
 
 
-export default function viewAll({data, studentList}) {
+export default function viewAll({data, id}) {
 
-    //if we want to redirect the user
-    const router = useRouter()
+    //get the course ID
+     //if we want to redirect the user
+     const router = useRouter()
 
-    //if we want to get a parameter from the URL such as the ID.
-    const {id} = router.query
+     //if we want to get a parameter from the URL such as the ID.
+     const {cid} = router.query 
+    
 
+   
     const columns = [
         { name: "ID", uid: "studentid" },
+        { name: "Grade", uid: "" },
         { name: "First Name", uid: "fname" },
         { name: "Last Name", uid: "lastname" },
         { name: "Email", uid: "email" },
@@ -42,9 +46,9 @@ export default function viewAll({data, studentList}) {
         { name: "Enrolled in", uid: "enrolledin" },
       ];
       
-     
+    
 
-return(
+    return(
     
     <Container css={{"height": "844px", "background-size": "1500px", "backgroundImage": "url(/img/blackSky.jpg)"}}> 
       {/* Navbar */}  
@@ -188,7 +192,14 @@ return(
         data.map((item, i) => (
             //print out the table from the JSON we got from the API
             <Table.Row key="1">
-                <Table.Cell>{item.studentid}</Table.Cell>   
+                <Table.Cell>{item.studentid}</Table.Cell>
+                <Table.Cell>
+                       
+                    <Input size="xs" id={`grade_`+item.studentid} labelPlaceholder={`grade_`+item.studentid}/>
+                        
+                     <Button type="button" onClick={(save) => saveData(item.studentid, id)} bordered color="primary" size="xs">Save</Button>
+                       
+                </Table.Cell>    
                 <Table.Cell>{item.fname}</Table.Cell> 
                 <Table.Cell>{item.lastname}</Table.Cell>
                 <Table.Cell>{item.email}</Table.Cell>
@@ -202,6 +213,56 @@ return(
    </Table>
 </Container> 
   ) 
+
+
+/**submit handler **/
+async function saveData(studentid, id) {
+
+    let gradeValue = document.getElementById('grade_'+studentid).value;
+
+    alert(studentid + " " + gradeValue + " " +id);
+
+       
+    
+    // Get data from the form - make json
+     const data = {
+        studentid: studentid,
+        grade: gradeValue,
+        cid: id
+    }
+
+  // Send the data to the server in JSON format.
+  const JSONdata = JSON.stringify(data)
+
+  // API endpoint where we send form data.
+  const endpoint = '/api/saveGrade'
+
+
+
+  // Form the request for sending data to the server.
+  const options = {
+    // The method is POST because we are sending data.
+    method: 'POST',
+    // Tell the server we're sending JSON.
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    // Body of the request is the JSON data we created above.
+    body: JSONdata,
+  }
+
+  
+
+  // Send the form data to our forms API on Vercel and get a response.
+  const response = await fetch(endpoint, options)
+
+  // Get the response data from server as JSON.
+  // If server returns the name submitted, that means the form works.
+  const result = await response.json()
+
+    alert('saved');
+
+}
 }
 
 export async function getServerSideProps(context) {
@@ -209,11 +270,11 @@ export async function getServerSideProps(context) {
     let id = context.query.id;
     console.log("current id" + id);
 
-    const res = await fetch(`http://localhost:3000/api/getEnrolledStudents?studentid=`+id)
+    const res = await fetch(`http://localhost:3000/api/getEnrolledStudents?studentid=`+id);
     const data = await res.json()
     console.log("Student list is:" + data)
    
     return {
-      props: { data }, // will be passed to the page component as props
+      props: { data, id }, // will be passed to the page component as props
     }
   }
