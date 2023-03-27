@@ -75,15 +75,13 @@ export default function Login() {
          //  if we get back ok message, redirect to the next page.
 
          if(result.includes("ok")){
- 
+
+          alert("Result was OK!");
           router.push("/listAllCourses");
         }
 
        
   }
-
-
-
 
 
   return (

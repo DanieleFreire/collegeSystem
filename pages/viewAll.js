@@ -195,9 +195,9 @@ export default function viewAll({data, id}) {
                 <Table.Cell>{item.studentid}</Table.Cell>
                 <Table.Cell>
                        
-                    <Input size="xs" id={`grade_`+item.studentid} labelPlaceholder={`grade_`+item.studentid}/>
+                    <Input size="lg" id={`grade_`+item.studentid} labelPlaceholder={`grade_`+item.studentid}/>
                         
-                     <Button type="button" onClick={(save) => saveData(item.studentid, id)} bordered color="primary" size="xs">Save</Button>
+                     <Button type="button" onClick={(save) => saveData(item.studentid, id)} bordered color="primary" size="lg" flat as={Link} href="/viewAllGrd">Save</Button>
                        
                 </Table.Cell>    
                 <Table.Cell>{item.fname}</Table.Cell> 

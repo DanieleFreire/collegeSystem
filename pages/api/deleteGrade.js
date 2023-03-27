@@ -1,13 +1,9 @@
-
-
-export default function saveGrade(req, res) {
+export default function deleteGrade(req, res) {
 
     console.log("login api page called...");
    
-    const cid = req.body.cid;
-    const studentid = req.body.studentid;
-    const grade = req.body.grade;
-
+      
+    const gradeid = req.body.gradeid;
     
 
     // get the client
@@ -23,21 +19,24 @@ export default function saveGrade(req, res) {
     });
   
   
-    // simple query
+     // simple query
   connection.query(
-    "INSERT INTO wse.grades (grade,id,studentid) VALUES ('"+grade+"','"+cid+"','"+studentid+"');",
+    "DELETE FROM wse.grades WHERE gradesid=('"+gradeid+"');",
     function(err, results, fields) {
    
-
-            
-           
         // return back the records
         res.status(200).json(results);
-
-      
-
-              
+            
+           
+                    
      
     }
   );
 }  
+
+
+
+
+
+
+
