@@ -24,37 +24,43 @@ export default function viewAllGrd({data}) {
     const router = useRouter()
 
     const columns = [
-      { name: "ID", uid: "gradeid" },
-      { name: "Grade", uid: "grade" },
+      
       { name: "StudentID", uid: "studentid" },
+      { name: "courseID", uid: "id" },
+      { name: "Grade", uid: "grade" },
       { name: "DELETE", uid: "actions" },
+      { name: "", uid: "students"},
    
     ];
   
     const renderCell = (user, columnKey) => {
       const cellValue = user[columnKey];
       switch (columnKey) {
-        case "gradeid":
-          return (
-            <User name={cellValue} css={{ p: 0 }}>
-             {user.gradesid}
-            </User>
-          );
+        case "studentid":
+        return (
+        <Col>
+            <Row>
+            <Text b size={20} css={{ tt: "capitalize" }}>
+                {cellValue}
+            </Text>
+            </Row>
+        </Col>
+        );       
+        case "id":
+            return (
+            <Col>
+                <Row>
+                <Text b size={20} css={{ tt: "capitalize" }}>
+                    {cellValue}
+                </Text>
+                </Row>
+            </Col>
+            );       
         case "grade":
           return (
             <Col>
               <Row>
-                <Text b size={14} css={{ tt: "capitalize" }}>
-                 {cellValue}
-                </Text>
-              </Row>
-            </Col>
-          );
-        case "studentid":
-          return (
-            <Col>
-              <Row>
-                <Text b size={14} css={{ tt: "capitalize" }}>
+                <Text b size={20} css={{ tt: "capitalize" }}>
                  {cellValue}
                 </Text>
               </Row>
@@ -68,10 +74,9 @@ export default function viewAllGrd({data}) {
               <form onSubmit={handleSubmit}>
               <input type="hidden" id='gradeid' value={user.gradesid}></input>
               <Tooltip
-                  content="Delete item"              
+                  content="Delete grade"              
                   color="error"
-                  onClick={() => console.log("Delete item", user.gradesid)}
-                    >
+                  onClick={() => console.log("Delete grade", user.gradesid)}>
                   <IconButton type='submit' >
                     <DeleteIcon size={20} fill="red" />
                   </IconButton>
@@ -80,7 +85,17 @@ export default function viewAllGrd({data}) {
               </Col>       
             </Row>    
           );
-
+        
+        case "students":
+          return(
+            <Row justify="center" align="center"> 
+              <Col alignItems="center" >
+                <Button auto type="submit" bordered color="primary" flat as={Link} href={`/viewAll?id=${user.id}`}>
+                    See Student
+                </Button>                       
+              </Col>
+            </Row> 
+          ); 
         
         default:
           return cellValue;    
@@ -143,66 +158,7 @@ export default function viewAllGrd({data}) {
 
 
 
-      // Handle the submit for the form
-    async function handleSubmitCheckout(event) {
-
-        alert("The form was submitted");
-        event.preventDefault();
-   
-
-      // grab the variables from the form.
-      const userid = document.querySelector('#userid').value;
-
-      console.log("userid is " + userid);
-
-               
-
-
-       // Get data from the form - make json.
-       const data = {
-         userid: event.target.userid.value,
-       }
-   
-       // Send the data to the server in JSON format.
-       const JSONdata = JSON.stringify(data)
-   
-
-     //Send the data to the server side.  
-       // API endpoint where we send form data.
-       const endpoint = '/api/saveGrade'
-
-
-       // Form the request for sending data to the server.
-       const options = {
-         // The method is POST because we are sending data.
-         method: 'POST',
-         // Tell the server we're sending JSON.
-         headers: {
-           'Content-Type': 'application/json',
-         },
-         // Body of the request is the JSON data we created above.
-         body: JSONdata,
-       }
-
-       
-   
-       // Send the form data to our forms API on Vercel and get a response.
-       const response = await fetch(endpoint, options)
-   
-       // Get the response data from server as JSON.
-       // If server returns the name submitted, that means the form works.
-       const result = await response.json()
-       alert(`server result: ${result}`)
-
-       // redirect based on the result
-      if(result.includes("ok")){
- 
-        router.push("/viewAllGrd");
-      }
-
-  
-    }
-  
+    
     
     return (
         <Container css={{"height": "844px", "background-size": "1500px", "backgroundImage": "url(/img/blackSky.jpg)"}}> 
@@ -317,7 +273,6 @@ export default function viewAllGrd({data}) {
         </Navbar>
         <Spacer y={1.5} />
         {/* Table */}
-
          <Table 
         aria-label="Example table with custom cells"
         css={{
@@ -347,21 +302,6 @@ export default function viewAllGrd({data}) {
         )}
       </Table.Body>
     </Table>
-    <Grid.Container gap={2} >
-       
-      <Grid justify='flex-end'xs={12} md={6}>
-      <div>
-          <form onSubmit={handleSubmitCheckout}>
-          <input type="hidden" id='userid' value={35}></input>
-      <Button auto type="submit"  
-            src="/listAllCourses">
-               See Courses
-              </Button>
-      </form>
-      </div>
-      </Grid>
-     
-    </Grid.Container>   
     </Container>       
     )
 }

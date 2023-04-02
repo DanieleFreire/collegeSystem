@@ -6,9 +6,6 @@ import { Container, Navbar, Dropdown, User, Avatar, Image, Card, Row, Text, Col,
 import { Button, Grid, styled, Tooltip } from "@nextui-org/react";
 import { Link, Table } from "@nextui-org/react";
 import { SearchIcon } from "/components/SearchIcon.js";
-import { StyledBadge } from "/components/StyledBadge";
-import { IconButton } from "/components/IconButton";
-import { EditIcon } from "/components/EditIcon";
 
 const Styledimg = styled("img", {
     background: "transparent",
@@ -59,7 +56,7 @@ export default function viewAll({data, id}) {
                 <Styledimg src="/img/logo.png" width={100} height={60} cursor="pointer" css={{"marginTop": "10px", "marginLeft": "10px"}}/>
             </Navbar.Brand>
         <Navbar.Content enableCursorHighlight hideIn="xs" variant="underline">
-          <Navbar.Link href="#">Dashboard</Navbar.Link>
+          <Navbar.Link href="">Dashboard</Navbar.Link>
           <Navbar.Link href="/listAllCourses">Courses</Navbar.Link>
           <Navbar.Link href="#">Students</Navbar.Link>
           <Navbar.Link href="#">Settings</Navbar.Link>

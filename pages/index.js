@@ -6,7 +6,7 @@ import {useRouter} from 'next/router'
 import { Input } from "@nextui-org/react";
 import { Container, Navbar, Image, Card, Row, Text, Col, Spacer } from "@nextui-org/react";
 import { Button, Grid, styled } from "@nextui-org/react";
-import { Link } from "@nextui-org/react";
+
 
 const Styledimg = styled("img", {
   background: "transparent",
