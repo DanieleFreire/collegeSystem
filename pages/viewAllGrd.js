@@ -170,10 +170,9 @@ export default function viewAllGrd({data}) {
                     <Styledimg src="/img/logo.png" width={100} height={60} cursor="pointer" css={{"marginTop": "10px", "marginLeft": "10px"}}/>
                 </Navbar.Brand>
             <Navbar.Content enableCursorHighlight hideIn="xs" variant="underline">
-            <Navbar.Link href="#">Dashboard</Navbar.Link>
-            <Navbar.Link href="/listAllCourses">Courses</Navbar.Link>
-            <Navbar.Link href="#">Students</Navbar.Link>
-            <Navbar.Link href="#">Settings</Navbar.Link>
+              <Navbar.Link href="/listAllCourses">Courses</Navbar.Link>
+              <Navbar.Link href="/registerStudents">Register Students</Navbar.Link>
+              <Navbar.Link href="/viewAllGrd">View Grades</Navbar.Link>
             </Navbar.Content>
             <Navbar.Content
             css={{

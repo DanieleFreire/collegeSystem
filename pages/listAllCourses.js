@@ -8,6 +8,8 @@ import { SearchIcon } from "/components/SearchIcon.js";
 import { StyledBadge } from "/components/StyledBadge";
 import { IconButton } from "/components/IconButton";
 import { EditIcon } from "/components/EditIcon";
+import { DeleteIcon } from "/components/DeleteIcon";
+
 
 
 const Styledimg = styled("img", {
@@ -35,7 +37,7 @@ export default function ListAllCourses({data, courseList}) {
         { name: "TITLE", uid: "title" },
         { name: "NFQ", uid: "nfq" },
         { name: "YEARS COURSE", uid: "courseyear" },
-        { name: "EDIT GRADES", uid: "actions" },
+        { name: "", uid: "actions" },
       ];
       
       const renderCell = (course, columnKey) => {
@@ -71,18 +73,30 @@ export default function ListAllCourses({data, courseList}) {
     
           case "actions":
             return (
-              <Row justify="center" align="center">
+              <Row justify="center" align="center" css={{ "marginRight": "70px" }}>
                 <Col/>
                 <Col css={{ d: "flex" }}>
                   <Tooltip content="Insert grades">
                     <Link href={`./viewAll?id=` +course.id}>
-                    <IconButton onClick={() => console.log("Edit course", course.id)} css={{ "marginLeft": "20px" }}>
+                    <IconButton onClick={() => console.log("Edit course", course.id)} css={{ "marginLeft": "0px" }}>
                       <EditIcon size={20} fill="#979797"/>
                     </IconButton>
                     </Link>
                   </Tooltip>
                 </Col>
-                <Col/>
+                <Col css={{ d: "flex" }}>
+                <form onSubmit={handleSubmit}>
+                <input type="hidden" id='id' value={course.id}></input>
+                <Tooltip
+                  content="Delete course"
+                  color="error"
+                  onClick={() => console.log("Delete user", course.id)}>
+                  <IconButton>
+                    <DeleteIcon size={20} fill="#FF0080" />
+                  </IconButton>
+                </Tooltip>
+                </form>
+            </Col>
               </Row>
             );
           default:
@@ -94,57 +108,50 @@ export default function ListAllCourses({data, courseList}) {
   // Handle the submit for the form
   async function handleSubmit(event) {
 
-      alert("Course clicked")
-      event.preventDefault();
-
-       /*    
-       // grab the variables from the form.
-       const id = document.querySelector('#id').value   
-       const title = document.querySelector('#title').value 
-       const nfq = document.querySelector('#nfq').value    
-       const desc = document.querySelector('#desc').value 
-       const courseyear = document.querySelector('#courseyear').value       
+    alert("Course deleted!")
+    event.preventDefault();
+  
+         
+     // grab the variables from the form.
+     const id = document.querySelector('#id').value
+           
+           
+      // Get data from the form - make json
+      const data = {
+        id: event.target.id.value,
+      }
+  
+      // Send the data to the server in JSON format.
+      const JSONdata = JSON.stringify(data)
+  
+      // API endpoint where we send form data.
+      const endpoint = '/api/deleteCourse'
+  
+  
+  
+      // Form the request for sending data to the server.
+      const options = {
+        // The method is POST because we are sending data.
+        method: 'POST',
+        // Tell the server we're sending JSON.
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // Body of the request is the JSON data we created above.
+        body: JSONdata,
+      }
+  
       
-             
-        // Get data from the form - make json
-        const data = {
-          id: event.target.id.value,
-          title: event.target.title.value,
-          nfq: event.target.nfq.value,
-          desc: event.target.desc.value,
-          courseyear: event.target.courseyear.value
-        }
-    */
-        // Send the data to the server in JSON format.
-        const JSONdata = JSON.stringify(data)
-    
-        // API endpoint where we send form data.
-        const endpoint = '/api/listCourses'
-
-
-    
-        // Form the request for sending data to the server.
-        const options = {
-          // The method is POST because we are sending data.
-          method: 'POST',
-          // Tell the server we're sending JSON.
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          // Body of the request is the JSON data we created above.
-          body: JSONdata,
-        }
-
-        
-    
-        // Send the form data to our forms API on Vercel and get a response.
-        const response = await fetch(endpoint, options)
-    
-        // Get the response data from server as JSON.
-        // If server returns the name submitted, that means the form works.
-        const result = await response.json()
-        
-        alert(`server result: ${result}`)
+  
+      // Send the form data to our forms API on Vercel and get a response.
+      const response = await fetch(endpoint, options)
+  
+      // Get the response data from server as JSON.
+      // If server returns the name submitted, that means the form works.
+      const result = await response.json()
+      
+      alert(`server result: ${result}`)
+  
 
 
   }    
@@ -161,10 +168,9 @@ export default function ListAllCourses({data, courseList}) {
                 <Styledimg src="/img/logo.png" width={100} height={60} cursor="pointer" css={{"marginTop": "10px", "marginLeft": "10px"}}/>
             </Navbar.Brand>
         <Navbar.Content enableCursorHighlight hideIn="xs" variant="underline">
-          <Navbar.Link href="#">Dashboard</Navbar.Link>
           <Navbar.Link href="/listAllCourses">Courses</Navbar.Link>
-          <Navbar.Link href="#">Students</Navbar.Link>
-          <Navbar.Link href="#">Settings</Navbar.Link>
+          <Navbar.Link href="/registerStudents">Register Students</Navbar.Link>
+          <Navbar.Link href="/viewAllGrd">View Grades</Navbar.Link>
         </Navbar.Content>
         <Navbar.Content
           css={{
@@ -294,74 +300,6 @@ export default function ListAllCourses({data, courseList}) {
       </Table.Body>
     </Table>
   </Container>  
-
- /*  
- <Grid.Container gap={2} justify="center">
-      <Grid xs={4}>
-       
-
-      <Card css={{ h: "$240", $$cardColor: '$colors$primary' }}>
-            <Card.Body>
-              <Text h6 size={15} color="white" css={{ mt: 0 }}>
-        
-              <tr> 
-            <td>ID</td>
-            <td>Title</td>
-            <td>Description</td>
-            <td>NFQ</td>
-            <td>Year</td>
-            
-            </tr>
-                        {data &&
-                        courseList.map((item, i) => (
-                        // print out the table from the JSON we got
-                        // from the API
-                       
-                        
-                        <form onSubmit={handleSubmit}>
-                        <td><input type="hidden" id='id' value={item.id}></input></td>
-                        <td><input type="hidden" id='title' value={item.title}></input></td>
-                        <td><input type="hidden" id='desc' value={item.desc}></input></td>
-                        <td><input type="hidden" id='nfq' value={item.nfq}></input></td>
-                        <td><input type="hidden" id='courseyear' value={item.courseyear}></input></td>
-                    
-                               
-                        <Input id='quantity' css ={{width: '120px', colorLabel: 'darkgreen', marginLeft: '20px', marginBottom: '10px'}}
-                        defaultValue={1}
-                        placeholder="quantity" 
-                        type="number" 
-                        />
-                        <Button size="xs" type="submit" css ={{background: 'seagreen', color: 'white', marginLeft: '60px'}}  >Add to Cart </Button>
-                        <Spacer y={1} />
-                        <Button auto type="submit" css ={{background: 'darkgreen', color: 'white', marginLeft: '15px'}}  flat as={Link} href="/checkout">Go to Checkout </Button>
-                        </form>
-                        
-                      
-                        
-                    
-                        ))   
-                        }
-        
-   
-  
-       
-          
-              // </Text>
-            </Card.Body>
-          </Card>
-
-
-
-
-
-      </Grid>
-    
-    </Grid.Container>
-
-
-   
-    </>
-*/
   )
 }
 

@@ -70,10 +70,7 @@ export default function Login() {
           // If server returns the name submitted, that means the form works.
           const result = await response.json()
           
-         //alert(`server result: ${result}`)
-
          //  if we get back ok message, redirect to the next page.
-
          if(result.includes("ok")){
 
           alert("Result was OK!");

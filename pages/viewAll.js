@@ -6,6 +6,8 @@ import { Container, Navbar, Dropdown, User, Avatar, Image, Card, Row, Text, Col,
 import { Button, Grid, styled, Tooltip } from "@nextui-org/react";
 import { Link, Table } from "@nextui-org/react";
 import { SearchIcon } from "/components/SearchIcon.js";
+import { IconButton } from "../components/IconButton";
+import { DeleteIcon } from "../components/DeleteIcon";
 
 const Styledimg = styled("img", {
     background: "transparent",
@@ -41,6 +43,7 @@ export default function viewAll({data, id}) {
         { name: "Address", uid: "address" },
         { name: "Telephone", uid: "telephone" },
         { name: "Enrolled in", uid: "enrolledin" },
+        { name: "Delete", uid: "delete" },
       ];
       
     
@@ -56,10 +59,9 @@ export default function viewAll({data, id}) {
                 <Styledimg src="/img/logo.png" width={100} height={60} cursor="pointer" css={{"marginTop": "10px", "marginLeft": "10px"}}/>
             </Navbar.Brand>
         <Navbar.Content enableCursorHighlight hideIn="xs" variant="underline">
-          <Navbar.Link href="">Dashboard</Navbar.Link>
           <Navbar.Link href="/listAllCourses">Courses</Navbar.Link>
-          <Navbar.Link href="#">Students</Navbar.Link>
-          <Navbar.Link href="#">Settings</Navbar.Link>
+          <Navbar.Link href="/registerStudents">Register Students</Navbar.Link>
+          <Navbar.Link href="/viewAllGrd">View Grades</Navbar.Link>
         </Navbar.Content>
         <Navbar.Content
           css={{
@@ -202,7 +204,20 @@ export default function viewAll({data, id}) {
                 <Table.Cell>{item.email}</Table.Cell>
                 <Table.Cell>{item.address}</Table.Cell>
                 <Table.Cell>{item.telephone}</Table.Cell>
-                <Table.Cell>{item.enrolledin}</Table.Cell>       
+                <Table.Cell>{item.enrolledin}</Table.Cell>
+                <Table.Cell>
+                <form onSubmit={handleSubmit}>
+                <input type="hidden" id='studentid' value={item.studentid}></input>
+                <Tooltip
+                  content="Delete student"              
+                  color="error"
+                  onClick={() => console.log("Delete student", item.studentid)}>
+                  <IconButton type='submit' >
+                    <DeleteIcon size={20} fill="red" />
+                  </IconButton>
+                </Tooltip>  
+                </form>                      
+                </Table.Cell>         
             </Table.Row>
         ))     
        } 
@@ -210,6 +225,57 @@ export default function viewAll({data, id}) {
    </Table>
 </Container> 
   ) 
+
+
+ // Handle the submit for the form
+ async function handleSubmit(event) {
+
+  alert("Student deleted!")
+  event.preventDefault();
+
+       
+   // grab the variables from the form.
+   const studentid = document.querySelector('#studentid').value
+         
+         
+    // Get data from the form - make json
+    const data = {
+      studentid: event.target.studentid.value,
+    }
+
+    // Send the data to the server in JSON format.
+    const JSONdata = JSON.stringify(data)
+
+    // API endpoint where we send form data.
+    const endpoint = '/api/deleteStudent'
+
+
+
+    // Form the request for sending data to the server.
+    const options = {
+      // The method is POST because we are sending data.
+      method: 'POST',
+      // Tell the server we're sending JSON.
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Body of the request is the JSON data we created above.
+      body: JSONdata,
+    }
+
+    
+
+    // Send the form data to our forms API on Vercel and get a response.
+    const response = await fetch(endpoint, options)
+
+    // Get the response data from server as JSON.
+    // If server returns the name submitted, that means the form works.
+    const result = await response.json()
+    
+    alert(`server result: ${result}`)
+
+
+}      
 
 
 /**submit handler **/
