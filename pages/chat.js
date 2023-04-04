@@ -25,20 +25,7 @@ export default function chat() {
 
   //  const router = useRouter()
 
-  const MockItem = ({ text }) => {
-    return (
-      <Card css={{ h: "$24", $$cardColor: '$colors$primary' }}>
-        <Card.Body>
-          <Text h6 size={15} color="white" css={{ mt: 0 }}>
-            {text}
-          </Text>
-        </Card.Body>
-      </Card>
-    );
-  };
     
-
-
   // Handle the submit for the form
   async function handleSubmit(event) {
 
@@ -100,10 +87,9 @@ export default function chat() {
                 <Styledimg src="/img/logo.png" width={100} height={60} cursor="pointer" css={{"marginTop": "10px", "marginLeft": "10px"}}/>
             </Navbar.Brand>
         <Navbar.Content enableCursorHighlight hideIn="xs" variant="underline">
-          <Navbar.Link href="#">Dashboard</Navbar.Link>
           <Navbar.Link href="/listAllCourses">Courses</Navbar.Link>
-          <Navbar.Link href="#">Students</Navbar.Link>
-          <Navbar.Link href="#">Settings</Navbar.Link>
+          <Navbar.Link href="/registerStudents">Register Students</Navbar.Link>
+          <Navbar.Link href="/viewAllGrd">View Grades</Navbar.Link>
         </Navbar.Content>
         <Navbar.Content
           css={{
@@ -208,110 +194,53 @@ export default function chat() {
         <Col css={{"width":"100%","marginTop": "0px"}}>
               <Card css={{ p: "$6", mw: "400px" }}>
                 <Card.Header>
-                  <img
-                  alt="nextui logo"
-                  src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                  width="34px"
-                  height="34px"
+                <User
+                  src="https://i.pravatar.cc/150?u=a048581f4e29026701d"
+                  name="John Doe"
+                  description="Computer science student"
+                  size="xl"
                 />
-              <Grid.Container css={{ pl: "$6" }}>
-                <Grid xs={12}>
-                  <Text h4 css={{ lineHeight: "$xs" }}>
-                    Next UI
-                  </Text>
-                </Grid>
-                <Grid xs={12}>
-                  <Text css={{ color: "$accents8" }}>nextui.org</Text>
-                </Grid>
-              </Grid.Container>
             </Card.Header>
-            <Card.Body css={{ py: "$2" }}>
+            <Card.Body css={{ marginLeft: "40px" }}>
               <Text>
-                Make beautiful websites regardless of your design experience.
+                Hi there!
               </Text>
             </Card.Body>
-            <Card.Footer>
-              <Link
-                icon
-                color="primary"
-                target="_blank"
-                href="https://github.com/nextui-org/nextui"
-              >
-                Visit source code on GitHub.
-              </Link>
-            </Card.Footer>
+          </Card>
+          <Spacer y={2} />
+          <Card css={{ p: "$6", mw: "400px", $$cardColor: '$colors$primary' }}>
+          <Card.Header>
+                <User
+                  src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                  name="Cassie Jacobs"
+                  description="Computer science student"
+                  size="xl"
+                />
+            </Card.Header>
+            <Card.Body>
+              <Text>
+                "Sometimes the most brilliant and intelligent minds do not 
+                  shine in standardized tests because they do not have 
+                  standardized minds." (Diane Ravitch)
+              </Text>
+            </Card.Body>
           </Card>
           <Spacer y={2} />
           <Card css={{ p: "$6", mw: "400px" }}>
-                <Card.Header>
-                  <img
-                  alt="nextui logo"
-                  src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                  width="34px"
-                  height="34px"
+          <Card.Header>
+                <User
+                  src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+                  name="Aidan Freire"
+                  description="Computer science student"
+                  size="xl"
                 />
-              <Grid.Container css={{ pl: "$6" }}>
-                <Grid xs={12}>
-                  <Text h4 css={{ lineHeight: "$xs" }}>
-                    Next UI
-                  </Text>
-                </Grid>
-                <Grid xs={12}>
-                  <Text css={{ color: "$accents8" }}>nextui.org</Text>
-                </Grid>
-              </Grid.Container>
             </Card.Header>
-            <Card.Body css={{ py: "$2" }}>
+            <Card.Body>
               <Text>
-                Make beautiful websites regardless of your design experience.
+                "The beautiful thing about learning is that no one can take it away
+                from you." (B.B. King)
               </Text>
             </Card.Body>
-            <Card.Footer>
-              <Link
-                icon
-                color="primary"
-                target="_blank"
-                href="https://github.com/nextui-org/nextui"
-              >
-                Visit source code on GitHub.
-              </Link>
-            </Card.Footer>
-          </Card>
-          <Spacer y={2} />
-          <Card css={{ p: "$6", mw: "400px" }}>
-                <Card.Header>
-                  <img
-                  alt="nextui logo"
-                  src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                  width="34px"
-                  height="34px"
-                />
-              <Grid.Container css={{ pl: "$6" }}>
-                <Grid xs={12}>
-                  <Text h4 css={{ lineHeight: "$xs" }}>
-                    Next UI
-                  </Text>
-                </Grid>
-                <Grid xs={12}>
-                  <Text css={{ color: "$accents8" }}>nextui.org</Text>
-                </Grid>
-              </Grid.Container>
-            </Card.Header>
-            <Card.Body css={{ py: "$2" }}>
-              <Text>
-                Make beautiful websites regardless of your design experience.
-              </Text>
-            </Card.Body>
-            <Card.Footer>
-              <Link
-                icon
-                color="primary"
-                target="_blank"
-                href="https://github.com/nextui-org/nextui"
-              >
-                Visit source code on GitHub.
-              </Link>
-            </Card.Footer>
           </Card>
         </Col>
       </Grid>
@@ -319,26 +248,51 @@ export default function chat() {
       <Grid xs={7} >
       <Grid.Container gap={0}>
       <Grid xl >
-        <Card css={{ /*mw: "430px"*/ }}>
+        <Card >
           <Card.Header>
-            <Text b>Card Title</Text>
+              <User
+                  src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                  name="Cassie Jacobs"
+                  description="Computer science student"
+                  size="xl"
+                />
           </Card.Header>
           <Card.Divider />
           <Card.Body css={{ py: "$10" }}>
-            <Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Text>
+          <Spacer y={2} />
+          <Row justify="flex-end">
+          <Card variant="bordered" css={{ p: "$6", mw: "400px", $$cardColor: '$colors$primary', }}>
+            <Card.Body >
+              <Text weight="bold">
+                Hi Aidan! How are you?
+              </Text>
+            </Card.Body>
+          </Card>
+          </Row>
+          <Spacer y={2} />
+          <Card variant="bordered" css={{ p: "$6", mw: "400px", $$cardColor: '$colors$secondary' }}>
+            <Card.Body >
+              <Text weight="bold">
+                Hi Cassie! I'm good, thanks!
+              </Text>
+            </Card.Body>
+          </Card>
           </Card.Body>
-          <Card.Divider />
-          <Card.Footer>
-            <Row justify="flex-end">
-              <Button size="sm" light>
-                Cancel
-              </Button>
-              <Button size="sm">Agree</Button>
-            </Row>
+          
+          <Card.Footer css={{ margin: "auto"}}>
+          <Row justify="flex-end">
+            
+              <Input css={{ p: "$6", mw: "400px"}}
+              size="xl" 
+              shadow={false} 
+              status="primary" 
+              contentRightStyling={false}
+              placeholder="Type your message..."
+            />
+            <Button auto css={{marginTop: "20px"}} >Send</Button>
+          </Row>            
           </Card.Footer>
+          
         </Card>
       </Grid>
       </Grid.Container>
