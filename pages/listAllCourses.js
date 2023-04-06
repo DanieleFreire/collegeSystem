@@ -1,5 +1,3 @@
-import {useRouter} from 'next/router'
-
 import { Input } from "@nextui-org/react";
 import { Container, Navbar, Dropdown, User, Avatar, Image, Card, Row, Text, Col, Spacer } from "@nextui-org/react";
 import { Button, Grid, styled, Tooltip } from "@nextui-org/react";
@@ -27,17 +25,16 @@ const collapseItems = [
  
 
 
-export default function ListAllCourses({data, courseList}) {
+export default function ListAllCourses({courseList}) {
 
 
-  //  const router = useRouter()
-
+ 
     const columns = [
         { name: "ID", uid: "id" },
         { name: "TITLE", uid: "title" },
         { name: "NFQ", uid: "nfq" },
-        { name: "YEARS COURSE", uid: "courseyear" },
-        { name: "", uid: "actions" },
+        { name: "DURATION", uid: "courseyear" },
+        { name: "EDIT COURSE", uid: "actions" },
       ];
       
       const renderCell = (course, columnKey) => {
@@ -69,16 +66,16 @@ export default function ListAllCourses({data, courseList}) {
               </Col>
             );
           case "courseyear":
-            return <StyledBadge css={{ "marginLeft": "30px" }} type={course.status}>{cellValue}</StyledBadge>;
+            return <StyledBadge type={course.status}>{cellValue}</StyledBadge>;
     
           case "actions":
             return (
-              <Row justify="center" align="center" css={{ "marginRight": "70px" }}>
+              <Row justify="center" align="center" css={{ "marginRight": "0px" }}>
                 <Col/>
                 <Col css={{ d: "flex" }}>
                   <Tooltip content="Insert grades">
-                    <Link href={`./viewAll?id=` +course.id}>
-                    <IconButton onClick={() => console.log("Edit course", course.id)} css={{ "marginLeft": "0px" }}>
+                    <Link href={`./listAllModules?id=` +course.id}>
+                    <IconButton onClick={() => console.log("Edit course", course.id)} css={{ "marginRight": "10px" }}>
                       <EditIcon size={20} fill="#979797"/>
                     </IconButton>
                     </Link>
@@ -160,7 +157,7 @@ export default function ListAllCourses({data, courseList}) {
     
   return (
     
- <Container css={{"height": "844px", "background-size": "1500px", "backgroundImage": "url(/img/blackSky.jpg)"}}>  
+ <Container css={{"height": "950px","background-repeat": "no-repeat", "background-size": "auto",  "backgroundImage": "url(/img/blackSky.jpg)"}}>  
        {/* Navbar */}
       <Navbar variant = {"static"}>
         <Navbar.Brand> 

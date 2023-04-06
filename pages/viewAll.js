@@ -42,7 +42,8 @@ export default function viewAll({data, id}) {
         { name: "Email", uid: "email" },
         { name: "Address", uid: "address" },
         { name: "Telephone", uid: "telephone" },
-        { name: "Enrolled in", uid: "enrolledin" },
+        { name: "ID Course Enrolled in", uid: "enrolledin" },
+        { name: "ID Module Enrolled in", uid: "module_enrolled" },
         { name: "Delete", uid: "delete" },
       ];
       
@@ -50,9 +51,8 @@ export default function viewAll({data, id}) {
 
     return(
     
-    <Container css={{"height": "844px", "background-size": "1500px", "backgroundImage": "url(/img/blackSky.jpg)"}}> 
+    <Container css={{"height": "950px", "background-size": "auto",  "background-repeat": "no-repeat", "backgroundImage": "url(/img/blackSky.jpg)"}}> 
       {/* Navbar */}  
-    
       <Navbar variant = {"static"}>
         <Navbar.Brand> 
             <Navbar.Toggle aria-label="toggle navigation" />
@@ -196,7 +196,7 @@ export default function viewAll({data, id}) {
                        
                     <Input size="lg" id={`grade_`+item.studentid} labelPlaceholder={`grade_`+item.studentid}/>
                         
-                     <Button type="button" onClick={(save) => saveData(item.studentid, id)} bordered color="primary" size="lg" flat as={Link} href="/viewAllGrd">Save</Button>
+                    <Button type="button" onClick={(save) => saveData(item.studentid, id)} bordered color="primary" size="lg" flat as={Link} href="/viewAllGrd">Save</Button>
                        
                 </Table.Cell>    
                 <Table.Cell>{item.fname}</Table.Cell> 
@@ -205,6 +205,7 @@ export default function viewAll({data, id}) {
                 <Table.Cell>{item.address}</Table.Cell>
                 <Table.Cell>{item.telephone}</Table.Cell>
                 <Table.Cell>{item.enrolledin}</Table.Cell>
+                <Table.Cell>{item.module_enrolled}</Table.Cell>
                 <Table.Cell>
                 <form onSubmit={handleSubmit}>
                 <input type="hidden" id='studentid' value={item.studentid}></input>

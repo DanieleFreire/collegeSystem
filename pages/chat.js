@@ -1,9 +1,7 @@
-import {useRouter} from 'next/router'
-
 import { Input, Textarea } from "@nextui-org/react";
-import { Container, Navbar, Dropdown, User, Avatar, Image, Card, Row, Text, Col, Spacer } from "@nextui-org/react";
-import { Button, Grid, styled, Tooltip } from "@nextui-org/react";
-import { Link, Table } from "@nextui-org/react";
+import { Container, Navbar, Dropdown, User, Avatar, Card, Row, Text, Col, Spacer } from "@nextui-org/react";
+import { Button, Grid, styled } from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
 import { SearchIcon } from "../components/SearchIcon.js";
 
 const Styledimg = styled("img", {
@@ -23,13 +21,11 @@ const collapseItems = [
 export default function chat() {
 
 
-  //  const router = useRouter()
-
-    
+  
   // Handle the submit for the form
   async function handleSubmit(event) {
 
-      alert("Course clicked")
+    
       event.preventDefault();
 
         
@@ -76,10 +72,56 @@ export default function chat() {
   }    
 
 
+  async function callChatPage(){
+
+     // Form the request for sending data to the server.
+     const options = {
+      // The method is POST because we are sending data.
+      method: 'POST',
+      // Tell the server we're sending JSON.
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Body of the request is the JSON data we created above.
+      body: '',
+    }
+
+    
+    // Send the form data to our forms API on Vercel and get a response.
+    const response = await fetch('/api/getChat', options)
+
+    // Get the response data from server as JSON.
+    // If server returns the name submitted, that means the form works.
+    const result = await response.json()
+    
+    // stick the response into the chat window
+
+    console.log("chat page result: " + JSON.stringify(result));
+    console.log(result.username);
+
+    document.getElementById('chatLog').value = result.username + " says: " + result.content;
+  
+
+
+  }
+
+  //run the interval hook
+
+  setInterval(() => {
+    console.log('Interval triggered');
+
+    callChatPage();
+  
+
+
+    //end interval hook
+  }, 10000);
+
+
     
   return (
     
- <Container css={{"height": "844px", "background-size": "1500px", "backgroundImage": "url(/img/blackSky.jpg)"}}>  
+ <Container css={{"height": "950px", "background-repeat": "no-repeat", "background-size": "auto", "backgroundImage": "url(/img/blackSky.jpg)"}}>  
        {/* Navbar */}
       <Navbar variant = {"static"}>
         <Navbar.Brand> 
@@ -196,8 +238,8 @@ export default function chat() {
                 <Card.Header>
                 <User
                   src="https://i.pravatar.cc/150?u=a048581f4e29026701d"
-                  name="John Doe"
-                  description="Computer science student"
+                  name="Patrick Doe"
+                  description="Computer Science Lecturer - Phd"
                   size="xl"
                 />
             </Card.Header>
@@ -212,16 +254,16 @@ export default function chat() {
           <Card.Header>
                 <User
                   src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                  name="Cassie Jacobs"
-                  description="Computer science student"
+                  name="Diane Ravitch"
+                  description="History Lecturer - Phd"
                   size="xl"
                 />
             </Card.Header>
             <Card.Body>
               <Text>
-                "Sometimes the most brilliant and intelligent minds do not 
+                  Sometimes the most brilliant and intelligent minds do not 
                   shine in standardized tests because they do not have 
-                  standardized minds." (Diane Ravitch)
+                  standardized minds.
               </Text>
             </Card.Body>
           </Card>
@@ -229,9 +271,9 @@ export default function chat() {
           <Card css={{ p: "$6", mw: "400px" }}>
           <Card.Header>
                 <User
-                  src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-                  name="Aidan Freire"
-                  description="Computer science student"
+                  src="https://i.pravatar.cc/150?u=a04258114e29026702d"
+                  name="Jennifer Anderson"
+                  description="IT Technical Support"
                   size="xl"
                 />
             </Card.Header>
@@ -252,8 +294,8 @@ export default function chat() {
           <Card.Header>
               <User
                   src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                  name="Cassie Jacobs"
-                  description="Computer science student"
+                  name="Diane Ravitch"
+                  description="History Lecturer - Phd"
                   size="xl"
                 />
           </Card.Header>
@@ -264,7 +306,7 @@ export default function chat() {
           <Card variant="bordered" css={{ p: "$6", mw: "400px", $$cardColor: '$colors$primary', }}>
             <Card.Body >
               <Text weight="bold">
-                Hi Aidan! How are you?
+                Diane says: Hi Jennifer! 
               </Text>
             </Card.Body>
           </Card>
@@ -273,26 +315,36 @@ export default function chat() {
           <Card variant="bordered" css={{ p: "$6", mw: "400px", $$cardColor: '$colors$secondary' }}>
             <Card.Body >
               <Text weight="bold">
-                Hi Cassie! I'm good, thanks!
+                Jennifer says: Hi Diane! How can I help you?
               </Text>
             </Card.Body>
           </Card>
+          <Row justify="flex-end">
+          <Card css={{ p: "$6", mw: "400px" }}>
+          <Card.Body >
+          <Textarea css={{ p: "$6", mw: "400px"}} 
+            size="xl" 
+            label=""
+            status="primary"
+            id="chatLog"
+            />
           </Card.Body>
-          
+          </Card>
+          </Row>
+           </Card.Body>
           <Card.Footer css={{ margin: "auto"}}>
           <Row justify="flex-end">
-            
-              <Input css={{ p: "$6", mw: "400px"}}
-              size="xl" 
-              shadow={false} 
-              status="primary" 
-              contentRightStyling={false}
-              placeholder="Type your message..."
-            />
-            <Button auto css={{marginTop: "20px"}} >Send</Button>
+            <Spacer y={1.5}/>
+            <form onSubmit={handleSubmit}>
+              Username:
+              <Input size="xl" id="username" status="primary"  labelPlaceholder="" initialValue=""  css={{"width":"100%","marginTop": "0px"}}/>
+              <Spacer y={1.6}/>
+              Your message:
+              <Input size="xl" id="comment" status="primary"  labelPlaceholder="" initialValue=""  css={{"width":"100%","marginTop": "0px"}}/> 
+              <Button type="submit" auto css={{"width":"100%", "marginTop": "20px"}} >Send</Button>
+            </form>
           </Row>            
-          </Card.Footer>
-          
+          </Card.Footer>    
         </Card>
       </Grid>
       </Grid.Container>
@@ -303,73 +355,6 @@ export default function chat() {
          
   </Container>  
 
- /*  
- <Grid.Container gap={2} justify="center">
-      <Grid xs={4}>
-       
-
-      <Card css={{ h: "$240", $$cardColor: '$colors$primary' }}>
-            <Card.Body>
-              <Text h6 size={15} color="white" css={{ mt: 0 }}>
-        
-              <tr> 
-            <td>ID</td>
-            <td>Title</td>
-            <td>Description</td>
-            <td>NFQ</td>
-            <td>Year</td>
-            
-            </tr>
-                        {data &&
-                        courseList.map((item, i) => (
-                        // print out the table from the JSON we got
-                        // from the API
-                       
-                        
-                        <form onSubmit={handleSubmit}>
-                        <td><input type="hidden" id='id' value={item.id}></input></td>
-                        <td><input type="hidden" id='title' value={item.title}></input></td>
-                        <td><input type="hidden" id='desc' value={item.desc}></input></td>
-                        <td><input type="hidden" id='nfq' value={item.nfq}></input></td>
-                        <td><input type="hidden" id='courseyear' value={item.courseyear}></input></td>
-                    
-                               
-                        <Input id='quantity' css ={{width: '120px', colorLabel: 'darkgreen', marginLeft: '20px', marginBottom: '10px'}}
-                        defaultValue={1}
-                        placeholder="quantity" 
-                        type="number" 
-                        />
-                        <Button size="xs" type="submit" css ={{background: 'seagreen', color: 'white', marginLeft: '60px'}}  >Add to Cart </Button>
-                        <Spacer y={1} />
-                        <Button auto type="submit" css ={{background: 'darkgreen', color: 'white', marginLeft: '15px'}}  flat as={Link} href="/checkout">Go to Checkout </Button>
-                        </form>
-                        
-                      
-                        
-                    
-                        ))   
-                        }
-        
-   
-  
-       
-          
-              // </Text>
-            </Card.Body>
-          </Card>
-
-
-
-
-
-      </Grid>
-    
-    </Grid.Container>
-
-
-   
-    </>
-*/
   )
 }
 
@@ -378,8 +363,11 @@ export async function getServerSideProps() {
     
     const res = await fetch(`http://localhost:3000/api/saveChat`)
     const data = await res.json()
-   
+
+       
     return {
       props: { data }, // will be passed to the page component as props
     }
+
+    
   }

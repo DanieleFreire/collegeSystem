@@ -20,7 +20,7 @@ const Styledimg = styled("img", {
 
     
   
-export default function registerStudents({data, studentList}) {
+export default function registerStudents() {
 
     //get the course ID
      //if we want to redirect the user
@@ -58,6 +58,10 @@ export default function registerStudents({data, studentList}) {
     const enrolledin = document.querySelector('#enrolledin').value;
     
     console.log("enrolledin " + enrolledin);
+
+    const module_enrolled = document.querySelector('#module_enrolled').value;
+    
+    console.log("module_enrolled " + module_enrolled);
     
     
     // Get data from the form - make json.
@@ -68,6 +72,7 @@ export default function registerStudents({data, studentList}) {
         address: event.target.address.value,
         telephone: event.target.telephone.value,
         enrolledin: event.target.enrolledin.value,
+        module_enrolled: event.target.module_enrolled.value,
     }
       
           
@@ -112,9 +117,8 @@ export default function registerStudents({data, studentList}) {
 
     return(
     
-    <Container css={{"height": "844px", "background-size": "1500px", "backgroundImage": "url(/img/blackSky.jpg)"}}> 
+    <Container css={{"height": "950px", "background-size": "auto",  "background-repeat": "no-repeat", "backgroundImage": "url(/img/blackSky.jpg)"}}> 
       {/* Navbar */}  
-    
       <Navbar variant = {"static"}>
         <Navbar.Brand> 
             <Navbar.Toggle aria-label="toggle navigation" />
@@ -228,7 +232,7 @@ export default function registerStudents({data, studentList}) {
         <Col css={{"width":"100%"}}>
           <Text h1
                 size={40}
-                css={{color: "white", "textAlign": "center", "marginTop": "50px"
+                css={{color: "white", "textAlign": "center", "marginTop": "30px"
                 }}
                 weight="bold">Please Register Students Here</Text>   
         </Col>
@@ -241,29 +245,24 @@ export default function registerStudents({data, studentList}) {
           <Col alignItems="center">
             <form onSubmit={handleSubmit}>
               <Input size="xl" id="fname" status="primary"  labelPlaceholder="First Name" initialValue=""  css={{"width":"100%","marginTop": "50px"}}/>
-              <Spacer y={0.5} />
 
               <Input size="xl" id="lastname" status="primary"  labelPlaceholder="Last Name" initialValue=""  css={{"width":"100%","marginTop": "40px"}}/> 
-              <Spacer y={0.5} />
 
               <Input size="xl" id="email" status="primary"  labelPlaceholder="Email" initialValue=""  css={{"width":"100%","marginTop": "40px"}}/> 
-              <Spacer y={0.5} />
 
               <Input size="xl" id="address" status="primary"  labelPlaceholder="Address" initialValue=""  css={{"width":"100%","marginTop": "40px"}}/> 
-              <Spacer y={0.5} />
-
+             
               <Input size="xl" id="telephone" status="primary"  labelPlaceholder="Telephone" initialValue=""  css={{"width":"100%","marginTop": "40px"}}/> 
-              <Spacer y={1.5} />
+              
+              <Input size="xl" id="enrolledin" status="primary"  labelPlaceholder="Course ID" initialValue=""  css={{"width":"100%","marginTop": "40px"}}/>
 
-              <Input size="xl" id="enrolledin" status="primary"  labelPlaceholder="Course ID" initialValue=""  css={{"width":"100%","marginTop": "40px"}}/> 
-              <Spacer y={1.5} />
-
-
+               <Input size="xl" id="module_enrolled" status="primary"  labelPlaceholder="Module ID" initialValue=""  css={{"width":"100%","marginTop": "40px"}}/>  
+             
               <Button type='submit' shadow color="primary" css={{"width":"100%","marginTop": "10px"}}>Register</Button>
-              <Spacer y={0.5} />
             </form>
           </Col>  
           <Col/>
+          <Spacer y={0.5} />
         </Row> 
         </Grid.Container>    
 </Container> 

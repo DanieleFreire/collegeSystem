@@ -161,9 +161,8 @@ export default function viewAllGrd({data}) {
     
     
     return (
-        <Container css={{"height": "844px", "background-size": "1500px", "backgroundImage": "url(/img/blackSky.jpg)"}}> 
+        <Container css={{"height": "950px", "background-size": "auto",  "background-repeat": "no-repeat", "backgroundImage": "url(/img/blackSky.jpg)"}}> 
          {/* Navbar */}  
-    
         <Navbar variant = {"static"}>
             <Navbar.Brand> 
                 <Navbar.Toggle aria-label="toggle navigation" />

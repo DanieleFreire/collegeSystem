@@ -8,6 +8,7 @@ export default function saveChat(req, res) {
 
 // Replace the url string w/ the MongoDB deployment's connection string.
 const uri = "mongodb://root:example@0.0.0.0:6666";
+
 // create mongo connection client
 const client = new MongoClient(uri);
 

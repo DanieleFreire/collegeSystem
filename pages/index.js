@@ -4,7 +4,7 @@
 import {useRouter} from 'next/router'
 
 import { Input } from "@nextui-org/react";
-import { Container, Navbar, Image, Card, Row, Text, Col, Spacer } from "@nextui-org/react";
+import { Container, Navbar, Row, Text, Col, Spacer } from "@nextui-org/react";
 import { Button, Grid, styled } from "@nextui-org/react";
 
 
@@ -83,7 +83,7 @@ export default function Login() {
 
   return (
 
-  <Container css={{"height": "844px", "background-size": "1500px", "backgroundImage": "url(https://littlevisuals.co/images/vik.jpg)"}}>  
+  <Container css={{"height": "950px", "background-size": "1500px", "background-repeat": "no-repeat", "backgroundImage": "url(https://littlevisuals.co/images/vik.jpg)"}}>  
        {/* Navbar Logo */}
       <Navbar variant = {"static"}>
         <Navbar.Content/>
