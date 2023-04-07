@@ -65,16 +65,6 @@ export default function handler(req, res) {
         console.log(results.length);
             
         res.status(200).json("ok"); //inside the function: being sure to get this response back to the brownser 
-          
-        //sending back the result.
-        if(results.length == 1){
-      
-            res.status(200).json("ok");
-          } else {
-           
-            res.status(200).json("fail");
-      
-          }    
                   
      
     }
