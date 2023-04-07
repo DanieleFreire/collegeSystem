@@ -1,6 +1,6 @@
 import { Input } from "@nextui-org/react";
-import { Container, Navbar, Dropdown, User, Avatar, Image, Card, Row, Text, Col, Spacer } from "@nextui-org/react";
-import { Button, Grid, styled, Tooltip } from "@nextui-org/react";
+import { Container, Navbar, Dropdown, Avatar, Row, Text, Col, Spacer } from "@nextui-org/react";
+import { styled, Tooltip } from "@nextui-org/react";
 import { Link, Table } from "@nextui-org/react";
 import { SearchIcon } from "/components/SearchIcon.js";
 import { StyledBadge } from "/components/StyledBadge";

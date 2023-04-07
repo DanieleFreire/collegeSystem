@@ -349,10 +349,7 @@ export default function chat() {
       </Grid>
       </Grid.Container>
       </Grid>
-    </Grid.Container>
-
-  
-         
+    </Grid.Container> 
   </Container>  
 
   )

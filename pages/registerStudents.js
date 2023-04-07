@@ -1,9 +1,9 @@
 import React from "react";
 import { useRouter } from 'next/router'
 import { Input } from "@nextui-org/react";
-import { Container, Navbar, Dropdown, User, Avatar, Image, Card, Row, Text, Col, Spacer } from "@nextui-org/react";
-import { Button, Grid, styled, Tooltip } from "@nextui-org/react";
-import { Link, Table } from "@nextui-org/react";
+import { Container, Navbar, Dropdown, Avatar, Row, Text, Col, Spacer } from "@nextui-org/react";
+import { Button, Grid, styled } from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
 import { SearchIcon } from "/components/SearchIcon.js";
 
 const Styledimg = styled("img", {
@@ -20,7 +20,7 @@ const Styledimg = styled("img", {
 
     
   
-export default function registerStudents() {
+export default function registerStudents({studentList, id}) {
 
     //get the course ID
      //if we want to redirect the user
@@ -265,17 +265,19 @@ export default function registerStudents() {
           <Spacer y={0.5} />
         </Row> 
         </Grid.Container>    
-</Container> 
-  ) 
+    </Container> 
+    ) 
 
 
 
 }
 export async function getServerSideProps() {
     
+  
+    
     const res = await fetch(`http://localhost:3000/api/registerNewStudents`)
     const studentList = await res.json()
-   
+    
     return {
       props: { studentList }, // will be passed to the page component as props
     }
@@ -288,200 +290,3 @@ export async function getServerSideProps() {
 
 
 
-/*import { Grid, Card, Text, Container } from "@nextui-org/react";
-import { Input, Button, Row } from "@nextui-org/react";
-
-
-import {useRouter} from 'next/router'
-
-
-
-export default function registerStudents() {
-  const router = useRouter()
-  
-
-
-  // Handle the submit for the form
-  async function handleSubmit(event) { 
-
-       alert("The form was submitted");
-       event.preventDefault();
-    
-
-       // grab the variables from the form.
-       const firstname = document.querySelector('#fname').value;
-
-       console.log("firstname is " + fname);
-
-       const lastname = document.querySelector('#lastname').value;
-
-       console.log("lastname is " + lastname);
-
-       const email = document.querySelector('#email').value;
-
-       console.log("email is " + email);
-
-       const address = document.querySelector('#address').value;
-
-       console.log("address is " + address);
-
-       const telephone = document.querySelector('#telephone').value;
-
-       console.log("telephone is " + telephone);
-
-       const enrolledin = document.querySelector('#enrolledin').value;
-
-       console.log("enrolledin " + enrolledin);
-
-       
-           
-
-
-        // Get data from the form - make json.
-        const data = {
-          firstname: event.target.fname.value,
-          lastname: event.target.lastname.value,
-          email: event.target.email.value,
-          address: event.target.address.value,
-          telephone: event.target.telephone.value,
-          enrolledin: event.target.enrolledin.value,
-        }
-    
-        // Send the data to the server in JSON format.
-        const JSONdata = JSON.stringify(data)
-    
-
-      //Send the data to the server side.  
-        // API endpoint where we send form data.
-        const endpoint = '/api/registerNewStudents'
-
-
-        // Form the request for sending data to the server.
-        const options = {
-          // The method is POST because we are sending data.
-          method: 'POST',
-          // Tell the server we're sending JSON.
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          // Body of the request is the JSON data we created above.
-          body: JSONdata,
-        }
-
-        
-    
-        // Send the form data to our forms API on Vercel and get a response.
-        const response = await fetch(endpoint, options)
-    
-        // Get the response data from server as JSON.
-        // If server returns the name submitted, that means the form works.
-        const result = await response.json()
-        alert(`server result: ${result}`)
-
-        // redirect based on the result
-      if(result.includes("ok")){
- 
-        router.push("/");
-      }
-    
-  }
-  
-  
-  return (
-    <>
- <form onSubmit={handleSubmit}> 
-    <Container xs={650} gap={2} >
-      <Row gap={1}>
-        
-          <Card css={{ $$cardColor: 'none' }}>
-            <Card.Body >
-            <Grid justify='center' xs={12} md={6} >       
-            <Text  h4 color="red" size={20} css={{ m: 20 }}>
-              REGISTRATION
-            </Text>
-            </Grid>
-            </Card.Body>
-          </Card> 
-        </Row>   
-       
-        <Row gap={1}>
-          <Card css={{ $$cardColor: 'none' }}>
-            <Card.Body>
-
-              <Input clearable label="firstname" placeholder="firstname"  id='fname'/>
-            </Card.Body>
-          </Card>
-      </Row>
-      <Row gap={1}>
-          <Card css={{ $$cardColor: 'none' }}>
-            <Card.Body>
-
-              <Input clearable label="lastname" placeholder="lastname"  id='lastname'/>
-            </Card.Body>
-          </Card>
-      </Row>
-      <Row gap={1}>
-          <Card css={{ $$cardColor: 'none' }}>
-            <Card.Body>
-
-              <Input clearable label="Email" placeholder="Email Address" id="email" />
-            </Card.Body>
-          </Card>
-      </Row>  
-      <Row gap={1}>
-       
-          <Card css={{ $$cardColor: 'none' }}>
-            <Card.Body>
-
-              <Input clearable label="Address" placeholder="Address"  id="address" />
-            </Card.Body>
-          </Card>
-      </Row>    
-      <Row gap={1}>
-          <Card css={{ $$cardColor: 'none' }}>
-            <Card.Body>
-
-              <Input clearable label="Telephone" placeholder="(123) 456-7890" id="telephone" />
-            </Card.Body>
-          </Card>
-      </Row>      
-     
-      <Row gap={1}>
-        
-          <Card css={{ $$cardColor: 'none' }}>
-            <Card.Body>
-        <Input.Password
-          clearable
-          initialValue="123"
-          type="password"
-          label="Password"
-          placeholder="Enter your password with eye"
-          id="password"/>
-            
-            </Card.Body>
-          </Card>
-
-      
-      </Row>
-      
-      <Row gap={1}>
-        
-          <Card css={{  $$cardColor: 'none'  }}>
-            <Card.Body>
-
-            <Button auto css={{ background: 'darkgreen', color: 'white' }}  type="submit">
-               Register Student
-              </Button>   
-            </Card.Body>
-          </Card>
-
-      
-      </Row>
-     
-    </Container>
-
-    </form> 
-  
-    </>
-  )
-}*/

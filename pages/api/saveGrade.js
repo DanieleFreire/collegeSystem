@@ -9,7 +9,6 @@ export default function saveGrade(req, res) {
     const grade = req.body.grade;
 
     
-
     // get the client
     const mysql = require('mysql2');
   
@@ -22,7 +21,12 @@ export default function saveGrade(req, res) {
       database: 'wse'
     });
   
-  
+    // validating grade as alpha character only
+    var validator = require('validator');
+    var gradeAlpha = validator.isAlpha(grade);
+
+    console.log("is grade alpha? " + gradeAlpha);
+
     // simple query
   connection.query(
     "INSERT INTO wse.grades (grade,id,studentid) VALUES ('"+grade+"','"+cid+"','"+studentid+"');",
@@ -34,7 +38,7 @@ export default function saveGrade(req, res) {
         // return back the records
         res.status(200).json(results);
 
-      
+       
 
               
      

@@ -1,11 +1,9 @@
-import {useRouter} from 'next/router'
 
 import { Input } from "@nextui-org/react";
-import { Container, Navbar, Dropdown, User, Avatar, Image, Card, Row, Text, Col, Spacer } from "@nextui-org/react";
-import { Button, Grid, styled, Tooltip } from "@nextui-org/react";
+import { Container, Navbar, Dropdown, Avatar, Text, Spacer } from "@nextui-org/react";
+import { styled, Tooltip } from "@nextui-org/react";
 import { Link, Table } from "@nextui-org/react";
 import { SearchIcon } from "/components/SearchIcon.js";
-import { StyledBadge } from "/components/StyledBadge";
 import { IconButton } from "/components/IconButton";
 import { EditIcon } from "/components/EditIcon";
 import { DeleteIcon } from "/components/DeleteIcon";
@@ -27,13 +25,11 @@ const collapseItems = [
  
 
 
-export default function ListAllModules({data, id}) {
+export default function ListAllModules({data}) {
 
-
-  //  const router = useRouter()
 
       const columns = [
-        { name: "ID", uid: "moduleid" },
+        { name: "MODULE ID", uid: "moduleid" },
         { name: "TITLE", uid: "title" },
         { name: "DESCRIPTION", uid: "desc" },
         { name: "NFQ", uid: "nfq" },
@@ -246,7 +242,7 @@ export default function ListAllModules({data, id}) {
                 <Table.Cell>{item.courseyear}</Table.Cell>
                 <Table.Cell>
                 <Tooltip content="Insert grades">
-                    <Link href={`./viewAll?id=` +item.id}>
+                    <Link href={`./viewAll?id=` +item.moduleid}>
                     <IconButton onClick={() => console.log("Edit course", item.id)} css={{ "marginLeft": "20px" }}>
                       <EditIcon size={20} fill="#979797"/>
                     </IconButton>

@@ -3,7 +3,7 @@ export default function deleteStudent(req, res) {
     console.log("login api page called...");
    
       
-    const studentid = req.body.studentid;
+    const moduleid = req.body.moduleid;
     
 
     // get the client

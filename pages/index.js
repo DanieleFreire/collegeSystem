@@ -1,6 +1,3 @@
-
-
-
 import {useRouter} from 'next/router'
 
 import { Input } from "@nextui-org/react";
@@ -75,6 +72,8 @@ export default function Login() {
 
           alert("Result was OK!");
           router.push("/listAllCourses");
+        } else{
+          alert('invalid login')
         }
 
        

@@ -6,22 +6,28 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "qunit"
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.10",
     "bcrypt": "^5.1.0",
     "boxicons": "^2.1.4",
     "iron-session": "^6.3.1",
+    "jsec": "^1.0.1",
+    "jsesc": "^3.0.2",
     "mongodb": "^5.2.0",
     "mysql2": "^2.3.3",
     "next": "12.3.1",
     "next-session": "^4.0.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sqlstring": "^2.3.3",
+    "validator": "^13.9.0"
   },
   "devDependencies": {
     "eslint": "8.25.0",
-    "eslint-config-next": "12.3.1"
+    "eslint-config-next": "12.3.1",
+    "qunit": "^2.19.4"
   }
 }

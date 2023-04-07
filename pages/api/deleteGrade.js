@@ -19,7 +19,8 @@ export default function deleteGrade(req, res) {
     });
   
   
-     // simple query
+    
+   // simple query
   connection.query(
     "DELETE FROM wse.grades WHERE gradesid=('"+gradeid+"');",
     function(err, results, fields) {

@@ -3,7 +3,7 @@ export default function deleteStudent(req, res) {
     console.log("login api page called...");
    
       
-    const id = req.body.id;
+    var id = req.body.id;
     
 
     // get the client
@@ -20,7 +20,7 @@ export default function deleteStudent(req, res) {
   
   
      // simple query
-  connection.query(
+   connection.query(
     "DELETE FROM wse.courses WHERE id=('"+id+"');",
     function(err, results, fields) {
    

@@ -3,12 +3,17 @@ import { MongoClient } from 'mongodb'
 export default function saveChat(req, res) {
 
     // catching the variables
-    const username = req.body.username;
-    const comment = req.body.comment;
+    const rawusername = req.body.username;
+    const rawcomment = req.body.comment;
 
 // Replace the url string w/ the MongoDB deployment's connection string.
 const uri = "mongodb://root:example@0.0.0.0:6666";
 
+
+// validating studentid usging jsesc
+var jsesc = require('jsesc');
+var username = jsesc(rawusername);
+var comment = jsesc(rawcomment);
 // create mongo connection client
 const client = new MongoClient(uri);
 

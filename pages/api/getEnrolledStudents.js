@@ -8,6 +8,7 @@ export default function getEnrolledStudents(req, res) {
    
     let currentID = req.query.studentid;
 
+    
     // get the client
     const mysql = require('mysql2');
   
@@ -23,7 +24,7 @@ export default function getEnrolledStudents(req, res) {
   
     // simple query
   connection.query(
-    "select * from students where enrolledin = '"+currentID+"';",
+    "select * from students where module_enrolled = '"+currentID+"';",
     function(err, results, fields) {
    
 
@@ -40,4 +41,7 @@ export default function getEnrolledStudents(req, res) {
      
     }
   );
+
+ 
 }  
+

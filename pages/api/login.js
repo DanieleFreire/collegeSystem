@@ -7,14 +7,10 @@ export default function handler(req, res) {
   
   
     // Get just the username and password and put them into variables.
-    const username = req.body.username;
-    const pass = req.body.password;
+    const rawusername = req.body.username;
+    const rawpass = req.body.password;
   
-    console.log("username is: "+ username);
-    console.log("password  is: "+ pass);
-  
-  
-      
+          
     // get the client
     const mysql = require('mysql2');
   
@@ -27,11 +23,21 @@ export default function handler(req, res) {
       database: 'wse'
     });
   
+  // validating username and pass usging jsesc
+  var jsesc = require('jsesc');
+  var username = jsesc(rawusername);
+  var pass = jsesc(rawpass);
+
+
+  console.log("username is: "+ username);
+  console.log("password  is: "+ pass);
   
     // simple query
   connection.query(
     "SELECT * FROM adminlogin WHERE username = '"+username+"' and pass = '"+pass+"' LIMIT 1;",
     function(err, results, fields) {
+
+      console.log(results.length);
    
       if(results.length == 1) {
 

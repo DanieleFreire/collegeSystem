@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/router'
 import { Input } from "@nextui-org/react";
-import { Container, Navbar, Dropdown, User, Avatar, Image, Card, Row, Text, Col, Spacer } from "@nextui-org/react";
-import { Button, Grid, styled, Tooltip } from "@nextui-org/react";
+import { Container, Navbar, Dropdown, Avatar,Text, Spacer } from "@nextui-org/react";
+import { Button, styled, Tooltip } from "@nextui-org/react";
 import { Link, Table } from "@nextui-org/react";
 import { SearchIcon } from "/components/SearchIcon.js";
 import { IconButton } from "../components/IconButton";
@@ -35,15 +35,15 @@ export default function viewAll({data, id}) {
 
    
     const columns = [
-        { name: "ID", uid: "studentid" },
+        { name: "Student ID", uid: "studentid" },
         { name: "Grade", uid: "" },
         { name: "First Name", uid: "fname" },
         { name: "Last Name", uid: "lastname" },
         { name: "Email", uid: "email" },
         { name: "Address", uid: "address" },
         { name: "Telephone", uid: "telephone" },
-        { name: "ID Course Enrolled in", uid: "enrolledin" },
-        { name: "ID Module Enrolled in", uid: "module_enrolled" },
+        { name: "Course ID", uid: "enrolledin" },
+        { name: "Module ID", uid: "module_enrolled" },
         { name: "Delete", uid: "delete" },
       ];
       

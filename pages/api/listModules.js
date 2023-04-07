@@ -3,7 +3,8 @@ export default function ListAllModulesQuery(req, res) {
     console.log("login api page called...");
 
     let currentID = req.query.moduleid;
-         
+
+             
     // get the client
     const mysql = require('mysql2');
   
@@ -33,4 +34,5 @@ export default function ListAllModulesQuery(req, res) {
      
     }
   );
+
 }  

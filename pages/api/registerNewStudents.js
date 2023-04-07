@@ -12,23 +12,33 @@ export default function handler(req, res) {
     const address = req.body.address;
     const telephone = req.body.telephone;
     const enrolledin = req.body.enrolledin;
+    const module_enrolled = req.body.module_enrolled;
     
     
-  
-    console.log("fname is: "+ fname);
-    console.log("lastname  is: "+ lastname);
-    console.log("email  is: "+ email);
-    console.log("address  is: "+ address);
-    console.log("telephone  is: "+ telephone);
-    console.log("enrolledin  is: "+ enrolledin);
+     
 
+    if(fname === '' || lastname === '' || email ==='' || address ==='' || 
+      telephone ==='' || enrolledin === '' || module_enrolled === ''){
+
+        res.status(200).json('There is one or more null fields left empty');
+        return
+
+    }else{            
     
+      console.log("fname is: "+ fname);
+      console.log("lastname  is: "+ lastname);
+      console.log("email  is: "+ email);
+      console.log("address  is: "+ address);
+      console.log("telephone  is: "+ telephone);
+      console.log("courseid  is: "+ enrolledin);
+      console.log("moduleid  is: "+ module_enrolled);
   
-  
+      
     // db
     // get the client
     const mysql = require('mysql2');
-  
+
+   
     // create the connection to database
     const connection = mysql.createConnection({
         host: 'localhost',
@@ -40,9 +50,10 @@ export default function handler(req, res) {
 
       // simple query
   connection.query(
-    "INSERT INTO wse.students (fname,lastname,email,address,telephone,enrolledin) VALUES ('"+fname+"','"+lastname+"','"+email+"','"+address+"','"+telephone+"','"+enrolledin+"');",
+    "INSERT INTO wse.students (fname,lastname,email,address,telephone,enrolledin,module_enrolled) VALUES ('"+fname+"','"+lastname+"','"+email+"','"+address+"','"+telephone+"','"+enrolledin+"','"+module_enrolled+"');",
     function(err, results, fields) {
-        
+
+              
         if(err) {
             console.log(err);
             res.status(200).json("fail" + err.sqlMessage);
@@ -69,5 +80,5 @@ export default function handler(req, res) {
     }
   );
   
-    
+}
 }
