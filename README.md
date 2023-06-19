@@ -6,27 +6,27 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - It is System College to grade students by the college staff.
 ---
 ## Features
-# Technology Competency 
+### Technology Competency 
 - Git repository used with a full history of commits provided
 - MySQL working with Docker and app
 - MongoDB working with Docker and app 
 
-# Grades Subsystem (MySQL)
+### Grades Subsystem (MySQL)
 - Login working
 - Listing all grades
 - New records can be added to DB
 - Delete grade records
 
-# Student Subsystem (MySQL)
+### Student Subsystem (MySQL)
 - Register new student
 - Associate student to course ID 
 - View course / Delete Course
 
-# Chat subsystem (MongoDB)
+### Chat subsystem (MongoDB)
 - Make new chat
 - View chat log async
 
-# General
+### General
 - Sessions were added to validate user access for pages
 - JavaScript api-side validation added
 
