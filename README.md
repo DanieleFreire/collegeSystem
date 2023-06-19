@@ -3,7 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## General Info
 - This project was part of the assessment for a Higher Degree in Computer Science by the Technological University Dublin.
 - This project was graded as A.
-- It is System College to grade students by the college staff.
+- It is a System College to grade students by college staff.
 ---
 ## Features
 ### Technology Competency 
